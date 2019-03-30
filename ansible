@@ -1,0 +1,15 @@
+
+-hosts: all
+ become: yes
+  roles:
+   - ansible-galaxy install geerlingguy.java
+  roles:
+  - ansible-galaxy install zaxos.tomcat-ansible-role
+  tasks:
+  - get_url:
+        src: github.com/shopizer-ecommerce/shopizer.git
+      dest: /home/ansible/shopizer.zip
+    notify:
+    - restart tomcat
+  handlers:
+  - name: restart tomc
